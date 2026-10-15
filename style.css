@@ -587,3 +587,55 @@ footer {
     }
     .reveal { opacity: 1; transform: none; filter: none; }
 }
+
+/* ==========================================================
+   Responsive : mise en page adaptée à tous les écrans
+   ========================================================== */
+
+/* Empêche tout débordement horizontal */
+html, body { max-width: 100%; overflow-x: hidden; }
+img, video { max-width: 100%; height: auto; }
+
+/* Textes longs dans les cartes (ex. « Coordonnateur ») */
+.stat-number {
+    overflow-wrap: anywhere;
+    padding-bottom: .1em;
+}
+.stat-text {
+    font-size: clamp(1rem, 2.2vw, 1.35rem);
+    line-height: 1.25;
+    hyphens: auto;
+}
+.glass-card { min-width: 0; padding: 1.25rem; }
+
+/* Espacement des sections qui s'adapte à la taille de l'écran */
+section { padding: clamp(3.5rem, 8vw, 6rem) 0; }
+
+/* Accueil */
+.hero { min-height: auto; padding-top: 7.5rem; padding-bottom: 3rem; }
+.hero-visual { width: min(420px, 80%); }
+
+/* Vitrine : hauteur adaptée à l'écran */
+.media-card img,
+.media-card video { height: clamp(180px, 35vw, 240px); }
+
+/* Cartes plus généreuses sur grand écran */
+@media (min-width: 768px) {
+    .glass-card { padding: 1.75rem; }
+}
+
+/* Sur téléphone, boutons de l'accueil pleine largeur */
+@media (max-width: 575.98px) {
+    .hero .d-flex .btn { width: 100%; }
+    .contact-link { padding: .9rem; gap: .75rem; }
+    .contact-icon { width: 46px; height: 46px; font-size: 1.3rem; }
+    .cv-card { padding: 1.5rem; }
+}
+
+/* Tablette et petits écrans */
+@media (max-width: 991.98px) {
+    .hero { text-align: center; }
+    .hero .lead { margin-left: auto; margin-right: auto; }
+    .hero .d-flex { justify-content: center; }
+    .hero .stat-card { margin-left: auto; margin-right: auto; }
+}
