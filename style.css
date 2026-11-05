@@ -389,6 +389,81 @@ h1, h2, h3, h4 { color: #fff; }
 }
 
 /* ==========================================================
+   Footer
+   ========================================================== */
+footer {
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+}
+
+/* ==========================================================
+   Animations
+   ========================================================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px) scale(.98);
+    filter: blur(6px);
+    transition:
+        opacity .9s var(--ease),
+        transform .9s var(--ease),
+        filter .9s var(--ease);
+    transition-delay: var(--delay, 0s);
+}
+.reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    filter: none;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+@keyframes marquee {
+    to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+    .reveal { opacity: 1; transform: none; filter: none; }
+}
+
+/* ==========================================================
+   Section CV
+   ========================================================== */
+.cv-section { padding: 0 0 5rem; }
+.cv-card {
+    position: relative;
+    overflow: hidden;
+    padding: 2.5rem;
+    background: var(--card);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 0 16px 48px rgba(0, 212, 255, .08);
+}
+.cv-card::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--grad);
+}
+.cv-card .btn i { display: inline-block; animation: bob 1.6s ease-in-out infinite; }
+@keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(3px); }
+}
+
+/* ==========================================================
    Contact : liens à marque et carte de localisation
    ========================================================== */
 .contact-link {
@@ -541,101 +616,287 @@ h1, h2, h3, h4 { color: #fff; }
 .cities i { color: var(--primary); margin-right: .3rem; }
 
 /* ==========================================================
-   Footer
+   Responsive et textes longs dans les cartes
    ========================================================== */
-footer {
-    padding: 2.5rem 0;
-    border-top: 1px solid var(--border);
-    color: var(--muted);
-}
-
-/* ==========================================================
-   Animations
-   ========================================================== */
-.reveal {
-    opacity: 0;
-    transform: translateY(40px) scale(.98);
-    filter: blur(6px);
-    transition:
-        opacity .9s var(--ease),
-        transform .9s var(--ease),
-        filter .9s var(--ease);
-    transition-delay: var(--delay, 0s);
-}
-.reveal.is-visible {
-    opacity: 1;
-    transform: none;
-    filter: none;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-12px); }
-}
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-@keyframes marquee {
-    to { transform: translateX(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-        scroll-behavior: auto !important;
-    }
-    .reveal { opacity: 1; transform: none; filter: none; }
-}
-
-/* ==========================================================
-   Responsive : mise en page adaptée à tous les écrans
-   ========================================================== */
-
-/* Empêche tout débordement horizontal */
 html, body { max-width: 100%; overflow-x: hidden; }
 img, video { max-width: 100%; height: auto; }
-
-/* Textes longs dans les cartes (ex. « Coordonnateur ») */
-.stat-number {
-    overflow-wrap: anywhere;
-    padding-bottom: .1em;
-}
-.stat-text {
-    font-size: clamp(1rem, 2.2vw, 1.35rem);
-    line-height: 1.25;
-    hyphens: auto;
-}
+.stat-number { overflow-wrap: anywhere; padding-bottom: .1em; }
+.stat-text { font-size: clamp(1rem, 2.2vw, 1.35rem); line-height: 1.25; hyphens: auto; }
 .glass-card { min-width: 0; padding: 1.25rem; }
-
-/* Espacement des sections qui s'adapte à la taille de l'écran */
 section { padding: clamp(3.5rem, 8vw, 6rem) 0; }
-
-/* Accueil */
 .hero { min-height: auto; padding-top: 7.5rem; padding-bottom: 3rem; }
 .hero-visual { width: min(420px, 80%); }
-
-/* Vitrine : hauteur adaptée à l'écran */
-.media-card img,
-.media-card video { height: clamp(180px, 35vw, 240px); }
-
-/* Cartes plus généreuses sur grand écran */
-@media (min-width: 768px) {
-    .glass-card { padding: 1.75rem; }
-}
-
-/* Sur téléphone, boutons de l'accueil pleine largeur */
+.media-card img, .media-card video { height: clamp(180px, 35vw, 240px); }
+@media (min-width: 768px) { .glass-card { padding: 1.75rem; } }
 @media (max-width: 575.98px) {
     .hero .d-flex .btn { width: 100%; }
     .contact-link { padding: .9rem; gap: .75rem; }
     .contact-icon { width: 46px; height: 46px; font-size: 1.3rem; }
-    .cv-card { padding: 1.5rem; }
 }
-
-/* Tablette et petits écrans */
 @media (max-width: 991.98px) {
     .hero { text-align: center; }
     .hero .lead { margin-left: auto; margin-right: auto; }
     .hero .d-flex { justify-content: center; }
     .hero .stat-card { margin-left: auto; margin-right: auto; }
+}
+
+/* ==========================================================
+   Refonte visuelle : palette sobre, ombres subtiles, polices
+   ========================================================== */
+:root {
+    --bg: #0b1020;
+    --card: rgba(17, 24, 39, .6);
+    --border: rgba(148, 163, 184, .14);
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #22d3ee;
+    --primary: #22d3ee;
+    --secondary: #38bdf8;
+    --grad: #22d3ee;
+    --radius: 14px;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, .25);
+    --shadow-md: 0 8px 24px -10px rgba(0, 0, 0, .45);
+    --shadow-lg: 0 18px 40px -16px rgba(0, 0, 0, .55);
+    --font-display: 'Syne', system-ui, sans-serif;
+    --font-body: 'Manrope', system-ui, sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg);
+    background-image: none;
+    line-height: 1.7;
+}
+h1, h2, h3, h4, .stat-number, .brand-name, .h5, .h6 {
+    font-family: var(--font-display);
+    letter-spacing: -.01em;
+}
+
+.gradient-text {
+    background: none;
+    color: var(--accent);
+    -webkit-text-fill-color: currentColor;
+}
+.eyebrow { color: var(--accent); letter-spacing: .16em; }
+.stat-number {
+    background: none;
+    color: var(--accent);
+    -webkit-text-fill-color: currentColor;
+}
+
+/* Cartes : fond uni, ombre légère */
+.glass-card {
+    background: var(--card);
+    backdrop-filter: none;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius);
+}
+.glass-card::before {
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(34, 211, 238, .07), transparent 45%);
+}
+.glass-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(34, 211, 238, .35);
+    box-shadow: var(--shadow-md);
+}
+.stat-card { background: var(--card); border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+
+/* Boutons : couleur unie */
+.btn-gradient {
+    background: var(--accent);
+    color: #0b1020;
+    font-weight: 700;
+    box-shadow: var(--shadow-sm);
+}
+.btn-gradient:hover {
+    background: #67e8f9;
+    color: #0b1020;
+    box-shadow: var(--shadow-md);
+}
+.btn-outline-glow {
+    border: 1px solid rgba(34, 211, 238, .55);
+    color: #67e8f9;
+    box-shadow: none;
+}
+.btn-outline-glow:hover {
+    background: rgba(34, 211, 238, .08);
+    color: #a5f3fc;
+    box-shadow: none;
+}
+
+/* Icônes : fond teinté, sans dégradé */
+.icon-badge, .icon-badge-sm {
+    background: rgba(34, 211, 238, .1);
+    color: var(--accent);
+    border: 1px solid rgba(34, 211, 238, .22);
+    box-shadow: none;
+    font-size: 1.15rem;
+}
+.icon-badge { font-size: 1.3rem; }
+.logo-icon {
+    background: rgba(34, 211, 238, .12);
+    color: var(--accent);
+    border: 1px solid rgba(34, 211, 238, .3);
+    animation: none;
+    box-shadow: none;
+    font-family: var(--font-display);
+}
+.brand-name { background: none; color: #fff; -webkit-text-fill-color: #fff; }
+.brand-sub { color: var(--muted); }
+
+/* Navigation */
+.navbar.scrolled {
+    background: rgba(11, 16, 32, .9) !important;
+    box-shadow: var(--shadow-md);
+}
+.nav-link::after { background: var(--accent); }
+
+/* Accueil */
+.badge-pill {
+    background: rgba(34, 211, 238, .08);
+    border-color: rgba(34, 211, 238, .25);
+    color: var(--accent);
+}
+.hero-visual { animation: none; }
+.hero-visual::before {
+    background: none;
+    border: 1px solid rgba(34, 211, 238, .3);
+    inset: -10px;
+    animation: none;
+    opacity: 1;
+    filter: none;
+}
+.hero-visual img { border: 4px solid var(--bg); }
+
+/* Timeline et listes */
+.timeline::before { background: rgba(34, 211, 238, .25); }
+.timeline-item::before { background: var(--accent); box-shadow: none; }
+.checklist li::before { color: var(--accent); }
+
+/* Vitrine */
+.media-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+.media-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: rgba(34, 211, 238, .35);
+}
+.media-card .caption {
+    background: rgba(11, 16, 32, .9);
+    color: #e2e8f0;
+    font-weight: 600;
+}
+
+/* Contact */
+.contact-link { background: transparent; }
+.contact-icon { box-shadow: none; }
+.contact-text strong { font-family: var(--font-display); }
+.map-icon { color: var(--accent); font-size: clamp(2.5rem, 6vw, 3.5rem); animation: none; }
+.radar .ring { border-color: rgba(34, 211, 238, .35); }
+.radar .ring.r2 { border-color: rgba(34, 211, 238, .18); }
+.radar .pin {
+    background: var(--accent);
+    color: #0b1020;
+    box-shadow: none;
+    animation: none;
+}
+.location-card {
+    background: var(--card);
+}
+.cities i { color: var(--accent); }
+.status-pill {
+    background: rgba(34, 197, 94, .08);
+    border-color: rgba(34, 197, 94, .3);
+}
+
+/* Compteurs et textes */
+.cities span { background: transparent; }
+footer { border-top: 1px solid var(--border); }
+
+/* ==========================================================
+   Corrections : logo et police des boutons
+   ========================================================== */
+:root {
+    --bs-body-font-family: 'Manrope', system-ui, sans-serif;
+    --bs-btn-font-family: 'Manrope', system-ui, sans-serif;
+}
+
+/* Boutons et liens : même police que la navigation */
+.btn,
+.nav-link,
+.navbar-brand {
+    font-family: var(--font-body);
+}
+.btn {
+    font-weight: 600;
+    letter-spacing: .01em;
+}
+
+/* Logo : icône et texte bien séparés, alignés */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-right: 2rem;
+    padding: 0;
+}
+.navbar-brand .logo-icon {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    font-size: .95rem;
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    line-height: 1;
+}
+.navbar-brand > span:last-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+    white-space: nowrap;
+    line-height: 1.1;
+}
+.navbar-brand .brand-name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+    -webkit-text-fill-color: #fff;
+}
+.navbar-brand .brand-sub {
+    font-size: .72rem;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+/* ==========================================================
+   Correction définitive de l'icône du logo « WC »
+   ========================================================== */
+.navbar-brand .logo-icon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    max-width: 44px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0 !important;
+    line-height: 1 !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+    text-indent: 0 !important;
+    animation: none !important;
 }
