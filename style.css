@@ -900,3 +900,31 @@ footer { border-top: 1px solid var(--border); }
     text-indent: 0 !important;
     animation: none !important;
 }
+
+/* ==========================================================
+   Typographie : Syne (titres, logo) et Manrope (texte, menu, boutons)
+   ========================================================== */
+body,
+p, li, small, .lead,
+.nav-link,
+.btn,
+.badge-pill,
+.eyebrow,
+.contact-text small,
+.navbar-brand .brand-sub {
+    font-family: var(--font-body) !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h5, .h6,
+.stat-number,
+.brand-name,
+.navbar-brand .brand-name,
+.logo-icon,
+.navbar-brand .logo-icon {
+    font-family: var(--font-display) !important;
+}
+
+h1 { font-weight: 800; }
+.btn { font-weight: 600; }
+.nav-link { font-weight: 500; }
